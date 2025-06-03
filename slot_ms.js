@@ -1,3 +1,84 @@
+const canvas = document.createElement('canvas')
+canvas.id = 'particles_canvas'
+canvas.style.position = 'fixed'
+canvas.style.pointerEvents = 'none'
+document.body.append(canvas)
+const ctx = canvas.getContext('2d')
+ctx.imageSmoothingEnabled = false;
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
+window.addEventListener('resize', function() { 
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+})
+
+let particles = []
+let animating = false
+
+function animate() {
+    particles = particles.filter(element => !element.delete)
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    particles.forEach(particle => {
+        particle.update()
+        particle.draw()
+    });
+    if(particles.length > 0) {
+        requestAnimationFrame(animate)
+    } else {
+        animating = false
+    }
+}
+class Konfetti {
+    constructor(x, y, size) {
+        this.delete = false
+        this.x = x
+        this.y = y
+        this.speedX = Math.random() * 10 - 5
+        this.speedY = Math.random() * 10 - 5
+        this.friction = .995
+        this.size = size
+        this.angel = Math.random()
+        this.width = 20
+        this.height = 40
+        this.color = 'hsl(' + Math.floor(Math.random() * 360) + ', 100%, 50%)'
+        particles.push(this)
+        if (!animating) {
+            animating = true
+            animate()
+        }
+    }
+    update() {
+        this.size -= 0.01
+        this.speedX *= this.friction
+        this.speedY *= this.friction
+        this.x += this.speedX
+        this.y += this.speedY
+        if (this.size <= 0.01 || this.y > canvas.height || this.y < - this.height || this.x > canvas.width || this.x < - this.width) {
+            this.delete = true
+        }
+    }
+    draw() {
+        ctx.save()
+        ctx.fillStyle = this.color
+        ctx.fillRect(this.x, this.y, this.width * this.size, this.height * this.size)
+        ctx.fill()
+        ctx.restore()
+    }
+}
+
+function konfetti_corners() {
+    spawn_konfetti(50, 0, 0)
+    spawn_konfetti(50, 0, window.innerHeight)
+    spawn_konfetti(50, window.innerWidth, 0)
+    spawn_konfetti(50, window.innerWidth, window.innerHeight)
+}
+
+function spawn_konfetti(count = 50, x = window.innerWidth * .5 - 1, y = 0) {
+    for (let i = 0; i < count; i++) {
+        new Konfetti(x, y, 1)
+    }
+}
+
 const symbols1 = ["🍎", "🍒", "🍋", "🍉", "🍇"]
 const symbols2 = ["🌷", "🌼", "🌻", "🌺", "🍀"]
 const symbols3 = ["☀️", "🌈", "⭐", "🌙", "🌍"]
@@ -98,20 +179,16 @@ class Slot_ms {
             const slot2 = results[1]
             const slot3 = results[2]
             if (slot1 == slot2) {
-                if (slot1 == slot3) {                                         // Gewinnüberprüfungen.
-                    console.log("\nDu gewinnst \(4*this.price) Chips.")
+                if (slot1 == slot3) {                                   
+                    konfetti_corners()
                     return 4*this.price // Alle 3 sind gleich.
                 }
-                console.log("\nDu gewinnst \(this.price) Chips.")
                 return this.price // 1 & 2 sind gleich.
             } else if (slot1 == slot3) {
-                console.log("\nDu gewinnst \(this.price) Chips.")
                 return this.price // 1 & 3 sind gleich.
             } else if (slot2 == slot3) {
-                console.log("\nDu gewinnst \(this.price) Chips.")
                 return this.price // 2 & 3 sind gleich.
             } else {
-                console.log("\nDu gewinnst nichts.")
                 return 0 // alle sind unterschiedlich.
             }
         }
