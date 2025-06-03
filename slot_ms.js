@@ -158,7 +158,7 @@ class Slot_ms {
         //let index = 0
         this.p_array.forEach(slot => {
             const result = slot[Math.floor(Math.random() * (slot.length - 1))]
-            result.scrollIntoView()
+            result.scrollIntoView({block: "nearest", inline: "nearest"})
             results.push(result.innerText)
 /* 
             const observer = new IntersectionObserver((entries) => {
@@ -173,6 +173,7 @@ class Slot_ms {
 
             index ++ */
         })
+        this.li.scrollIntoView({block: "nearest", inline: "nearest"})
 
         if (account_for_money) {
             const slot1 = results[0]

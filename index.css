@@ -15,6 +15,7 @@
     width: min(55rem, 65vw);
     overflow-x: scroll;
     scroll-snap-type: x proximity;
+    scroll-behavior: smooth;
     display: grid;
     grid-auto-flow: column;
     gap: 1rem;
