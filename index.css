@@ -82,7 +82,17 @@ header {
 
 header #money {
     position: absolute;
-    right: 2rem;
+    right: 1rem;
     top: 50%;
     transform: translateY(-50%);
+}
+
+header #reset {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: .8rem;
+    padding: .5em 1em;
+    background-color: chocolate;
 }
