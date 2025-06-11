@@ -39,3 +39,10 @@ main {
 body {
     background-color: var(--background-color);
 }
+
+section {
+    border-radius: 1.2rem;
+    background-color: var(--main-light-color);
+    outline: .25em var(--gold-color) groove;
+    margin-top: 2rem;
+}

@@ -1,18 +1,15 @@
-#slot_ms {
+section#slot_ms {
     border-radius: 1.2rem;
-    padding: 2rem;
     background-color: var(--main-light-color);
     outline: .25em var(--gold-color) groove;
     text-align: center;
     display: grid;
     justify-content: center;
-    width: fit-content;
-    margin: 0 auto;
+    width: 100%;
 }
 
 #slot_ms_ul {
     list-style: none;
-    width: min(55rem, 65vw);
     overflow-x: scroll;
     scroll-snap-type: x proximity;
     scroll-behavior: smooth;
@@ -62,8 +59,34 @@
     }
 }
 
+section#blackjack {
+    position: relative;
+    padding: 0 2rem 2rem 2rem;
+
+    > canvas {
+        background-color: #008080;
+        width: 100%;
+        border-radius: 1.2rem;
+        margin-top: 2rem;
+
+    }
+
+    > button {
+        position: absolute;
+        left: 50%;
+        top: calc(50% + 1rem);
+        transform: translate(-50%, -50%);
+        font-size: 1.6rem;
+    }
+}
+
 h1 {
     font-size: 2rem;
+}
+
+h2 {
+    padding-top: 2rem;
+    text-align: center;
 }
 
 button {

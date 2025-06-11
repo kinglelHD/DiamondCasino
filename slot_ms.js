@@ -101,6 +101,23 @@ function update_money() {
     document.getElementById('money').innerText = money + '🪙'
 }
 
+function add_money() {
+    const input = parseInt(window.prompt("Nicht genug Geld! Wie viel Geld möchtest du aufladen?"), 0)
+    if (!isNaN(input)){
+        money += Math.max(input, 0)
+        update_money()
+    }
+}
+
+function use_money(amount) {
+    if (money >= amount) {
+        money -= amount
+        update_money()
+    } else {
+        add_money()
+    }
+}
+
 class Slot_ms {
     constructor(price, symbols) {
         this.price = price
@@ -119,6 +136,8 @@ class Slot_ms {
                 money -= this.price
                 money += this.spin()
                 update_money()
+            } else {
+                add_money()
             }
         })
         this.slots = [slot1, slot2, slot3]

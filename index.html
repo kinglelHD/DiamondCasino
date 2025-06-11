@@ -10,16 +10,31 @@
 </head>
 <body>
     <header>
-        <button id="reset" onclick="money = 1000; update_money()">reset money</button>
+        <button id="reset" onclick="add_money()">Geld aufladen</button>
         <h1>Diamond💎Casino</h1>
         <p id="money">1000🪙</p>
     </header>
     <main>
-        <div id="slot_ms">
+        <section id="slot_ms">
             <h2>Slotmashienes</h2>
             <ul id="slot_ms_ul">
             </ul>
+        </section>
+        <div style="display: none;">
+            <section id="blackjack">
+                <h2>♦️♣️ Blackjack ♠️♥️</h2>
+                <canvas id="canvas"></canvas>
+                <button id="bj_play_btn">play</button>
+            </section>
+            <img src="assets/Cards/Back - Top Down 88x124.png">
+            <img src="assets/Cards/Card Deck - Top Down 88x140.png">
+            <img src="assets/Cards/Card Deck - Top Down B 124x104.png">
+            <img id="clubs_img" src="assets/Cards/Clubs - Top Down 88x124.png">
+            <img id="diamonds_img" src="assets/Cards/Diamonds - Top Down 88x124.png">
+            <img id="hearts_img" src="assets/Cards/Hearts - Top Down 88x124.png">
+            <img id="spades_img" src="assets/Cards/Spades - Top Down 88x124.png">
         </div>
+        
     </main>
     <footer>
         Keine minderjährigen Spieler erlaupt!🔞
